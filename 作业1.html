@@ -1,0 +1,139 @@
+<html>
+<meta charset="utf-8">
+<head>
+<title>作业1</title>
+<script>
+	pi=3.14159265358979323846;
+	//克拉索夫斯基椭球
+	a=6378245;
+	b=6356863;
+	e2=(a*a-b*b)/(a*a);
+	//2000国家大地坐标系
+	a_2000=6378137;
+	b_2000=6356752.31414;
+	e2_2000=(a_2000*a_2000-b_2000*b_2000)/(a_2000*a_2000);
+	//第一题
+	function Q1()
+	{
+		document.getElementById('answer1').innerHTML="waiting";
+		var degree=(32/180+30/(180*60))*pi;
+		M=(a*(1-e2))/Math.pow((1-e2*Math.sin(degree)*Math.sin(degree)),1.5);
+		M_2000=(a_2000*(1-e2_2000))/Math.pow((1-e2_2000*Math.sin(degree)*Math.sin(degree)),1.5);
+		N=(a)/Math.pow((1-e2*Math.sin(degree)*Math.sin(degree)),0.5);
+		N_2000=(a_2000)/Math.pow((1-e2_2000*Math.sin(degree)*Math.sin(degree)),0.5);
+		r=N*Math.cos(degree);
+		r_2000=N_2000*Math.cos(degree);
+		document.getElementById('answer1').innerHTML='采用克拉索夫斯基椭球时：<br/>M='+M+'m<br/>N='+N+'m<br/>r='+r+
+				'm<br/>采用2000坐标系时：<br/>M='+M_2000+'m<br/>N='+N_2000+'m<br/>r='+r_2000+'m';
+	}
+	function Q2()
+	{
+		document.getElementById('answer2').innerHTML="waiting";
+		min_degree=(0/180+0/(180*60))*pi;
+		max_degree=(32/180+30/(180*60))*pi;
+		gap=(max_degree-min_degree)/1000;
+		Sm=0;
+		Sm_2000=0;
+		for(i=min_degree+0.5*gap;i<max_degree;i=i+gap)
+		{M=(a*(1-e2))/Math.pow((1-e2*Math.sin(i)*Math.sin(i)),1.5);
+		M_2000=(a_2000*(1-e2_2000))/Math.pow((1-e2_2000*Math.sin(i)*Math.sin(i)),1.5);
+		Sm=Sm+M*gap;
+		Sm_2000=Sm_2000+M_2000*gap;
+		}
+		document.getElementById('answer2').innerHTML='采用克拉索夫斯基椭球时：<br/>Sm='+Sm+
+				'm<br/>采用2000坐标系时：<br/>Sm='+Sm_2000+'m';
+	}
+	function Q3()
+	{
+		document.getElementById('answer3').innerHTML="waiting";
+		degree=(32/180+30/(180*60))*pi;
+		degree_v=(119/180+30/(180*60))*pi;
+		N=(a)/Math.pow((1-e2*Math.sin(degree)*Math.sin(degree)),0.5);
+		r=N*Math.cos(degree);
+		Sn=r*degree_v;
+		N_2000=(a_2000)/Math.pow((1-e2_2000*Math.sin(degree)*Math.sin(degree)),0.5);
+		r_2000=N_2000*Math.cos(degree);
+		Sn_2000=r_2000*degree_v;
+		document.getElementById('answer3').innerHTML='采用克拉索夫斯基椭球时：<br/>Sn='+Sn+
+				'm<br/>采用2000坐标系时：<br/>Sn='+Sn_2000+'m';
+	}
+	function Q4()
+	{
+		document.getElementById('answer4').innerHTML="waiting";
+		min_degree_m=(30/180)*pi;
+		max_degree_m=(35/180)*pi;
+		min_degree_v=(115/180)*pi;
+		max_degree_v=(120/180)*pi;
+		gap_m=(max_degree_m-min_degree_m)/1000;
+		gap_v=(max_degree_v-min_degree_v)/1000;
+		T=0;
+		T_2000=0;
+		for(i_m=min_degree_m+0.5*gap_m;i_m<max_degree_m;i_m=i_m+gap_m)
+		{
+			for(i_v=min_degree_v+0.5*gap_v;i_v<max_degree_v;i_v=i_v+gap_v)
+			{
+				M=(a*(1-e2))/Math.pow((1-e2*Math.sin(i_m)*Math.sin(i_m)),1.5);
+				M_2000=(a_2000*(1-e2_2000))/Math.pow((1-e2_2000*Math.sin(i_m)*Math.sin(i_m)),1.5);
+				Sm=M*gap_m;
+				Sm_2000=M_2000*gap_m;
+				N=(a)/Math.pow((1-e2*Math.sin(i_m)*Math.sin(i_m)),0.5);
+				N_2000=(a_2000)/Math.pow((1-e2_2000*Math.sin(i_m)*Math.sin(i_m)),0.5);
+				r=N*Math.cos(i_m);
+				r_2000=N_2000*Math.cos(i_m);
+				Sn=r*gap_v;
+				Sn_2000=r_2000*gap_v;
+				T=T+Sm*Sn;
+				T_2000=T_2000+Sm_2000*Sn_2000;
+			}
+		}
+		document.getElementById('answer4').innerHTML='采用克拉索夫斯基椭球时：<br/>T='+T+
+				'm^2<br/>采用2000坐标系时：<br/>T='+T_2000+'m^2';
+	}
+</script>
+
+
+<style>span{color:#006b89}</style>
+
+</head>
+<body>
+	<div style="text-align: center;position: absolute;top:0px;left: 0px;right: 0px;height: 200px;background-color:#a6bfc3;font-size: 40px;">
+		<p style="top:80px;">实习作业1</p>
+		<p style="top:110px;font-size: 18px;">张景源 <a href="mailto:dev@sgis.site" style="text-underline:none">dev@sgis.site</a></p>
+	</div>
+	<div style="text-align: center;position: absolute;top:240px;left: 0px;right: 0px;height:auto;background-color:#ffffff;font-size: 18px;">
+		<p>
+			第一题<br/>
+			计算纬度为32°30′N的纬圈上某一点的子午圈曲率半径（M）、卯酉圈曲率半径（N）和纬圈半径（r）。
+			<br/>
+			<button onclick="Q1()">Run</button><br/>
+			结果:<br/>
+			<span id="answer1"></span>
+		</p>
+		<p>
+			第二题<br/>
+			计算从赤道（0°）至32°30′N的经线弧长。
+			<br/>
+			<button onclick="Q2()">Run</button><br/>
+			结果:<br/>
+			<span id="answer2"></span>
+		</p>
+		<p>
+			第三题<br/>
+			计算在32°30′N纬圈上从本初子午线（0°）至119°30′E的纬线弧长。
+			<br/>
+			<button onclick="Q3()">Run</button><br/>
+			结果:<br/>
+			<span id="answer3"></span>
+		</p>
+		<p>
+			第四题<br/>
+			计算球面梯形（30°N~35°N，115°E~120°E)的面积。<br/>
+			<button onclick="Q4()">Run</button><br/>
+			结果:<br/>
+			<span id="answer4"></span>
+		</p>
+
+
+	</div>
+</body>
+</html>

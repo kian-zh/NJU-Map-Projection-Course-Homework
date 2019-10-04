@@ -1,0 +1,38 @@
+<html>
+<meta charset="utf-8">
+<head>
+<!--第一题-->
+<script>
+	function Q1()
+	{
+		document.getElementById('answer1').innerHTML="waiting";
+	}
+</script>
+
+</head>
+<body>
+	<div style="text-align: center;position: absolute;top:0px;left: 0px;right: 0px;height: 200px;background-color:#a6bfc3;font-size: 40px;">
+		<p style="top:80px;">实习作业2</p>
+		<p style="top:110px;font-size: 18px;">张景源 <a href="mailto:dev@sgis.site" style="text-underline:none">dev@sgis.site</a></p>
+	</div>
+	<div style="text-align: center;position: absolute;top:240px;left: 0px;right: 0px;height:auto;background-color:#ffffff;font-size: 18px;">
+		<p>
+			第二题<br/>
+			请在计算机屏幕上绘制直线、圆、椭圆等不同的图形，分别采用不同的颜色、线型等，并注明作者。
+			<br/>
+			结果:<br/>
+			<span id="answer2"></span>
+			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400" height="400" style="background: #a6bfc3;border: 2px solid #1B1419">
+				<circle cx="100" cy="50" r="150" stroke="black"
+                        stroke-width="2" fill="none"></circle>
+				<ellipse cx="200" cy="80" rx="100" ry="50"
+						 style="fill:none;stroke:purple;stroke-width:2;" transform="rotate(30 20,40)"></ellipse>
+				<line x1="0" y1="0" x2="300" y2="400"
+                      style="stroke:rgb(255,0,0);stroke-width:2"></line>
+                <text x="20" y="360" fill="#5C638B" ><tspan style="font-size: large;">张景源</tspan> </text>
+                <path d="M 100 400 Q 200 400 300 300 Q 200 200 400 0" stroke="blue" stroke-width="5" fill="none"></path>
+			</svg>
+		</p>
+	</div>
+</body>
+</html>

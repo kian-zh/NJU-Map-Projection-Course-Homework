@@ -1,0 +1,65 @@
+<html>
+<meta charset="utf-8">
+<head>
+
+    <!--第一题-->
+    <script>
+        function Q1()
+        {
+            document.getElementById('answer1').innerHTML="waiting";
+            input=[[50,105],[50,115],[50,125],[40,105],[40,125],[30,105],[30,115],[30,125]];
+            ans="<tr><th>φ</th><th>λ</th><th>ɑ</th><th>Z</th></tr>";
+            for ( var i = 0; i <input.length; i++){
+                result=main(input[i][0],input[i][1],40,115);
+                ans=ans+"<tr><th>"+deg_deal(input[i][0])+"</th><th>"+deg_deal(input[i][1])+"</th><th>"+deg_deal(result.a)+"</th><th>"+deg_deal(result.b)+"</th></tr>";
+            }
+            ans="<table style='position:absolute;left:50%;margin-left:-200px;width:400px;'>"+ans+"</table>";
+            document.getElementById('answer1').innerHTML=ans;
+        }
+        function main(A,B,A0,B0) {
+            pi=3.14159265359;
+            A=(A/180)*pi;
+            B=(B/180)*pi;
+            A0=(A0/180)*pi;
+            B0=(B0/180)*pi;
+            Z=Math.acos(Math.sin(A)*Math.sin(A0)+Math.cos(A)*Math.cos(A0)*Math.cos(B-B0));
+            a=Math.asin((Math.cos(A)*Math.sin(B-B0))/(Math.sin(Z)));
+            deg_Z=(Z*180)/pi;
+            deg_a=(a*180)/pi;
+            if(A<A0){deg_a=180-deg_a;return {a:deg_a,b:deg_Z};}
+            if(deg_a<0){deg_a=deg_a+360;return {a:deg_a,b:deg_Z};}
+            return {a:deg_a,b:deg_Z};
+        }
+        function deg_deal(X) {
+            X1=Math.floor(X);
+            X=X-X1;
+            X2=Math.floor(X*60);
+            X=X-X2*(1/60);
+            X3=Math.floor(X*3600);
+            string=X1.toString()+"°"+X2.toString()+"′"+X3.toString()+"″";
+            return string;
+        }
+
+    </script>
+
+
+
+
+</head>
+<body>
+<div style="text-align: center;position: absolute;top:0px;left: 0px;right: 0px;height: 200px;background-color:#a6bfc3;font-size: 40px;">
+    <p style="top:80px;">实习作业3</p>
+    <p style="top:110px;font-size: 18px;">张景源 <a href="mailto:dev@sgis.site" style="text-underline:none">dev@sgis.site</a></p>
+</div>
+<div style="text-align: center;position: absolute;top:240px;left: 0px;right: 0px;height:auto;background-color:#ffffff;font-size: 18px;">
+    <p>
+        第一题<br/>
+        已知新极点Q的坐标为40°,115°。求在球面上纬度为30°-50°，经度为105°-125°的球面梯形上经纬差均为10°的各点的球面极坐标系。
+        <br/>
+        <button onclick="Q1()">Run</button><br/>
+        结果:<br/>
+        <span id="answer1" style="text-align: center"></span>
+    </p>
+</div>
+</body>
+</html>
